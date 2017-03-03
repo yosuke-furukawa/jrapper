@@ -1,8 +1,8 @@
-const rapper = require('..')
+const jrapper = require('..')
 
-rapper.build().then((tokenizer) => {
-  const rhymes = rapper.measure(
-    rapper.parse(tokenizer, '後始末するアノニマス')
+jrapper.build().then((tokenizer) => {
+  const rhymes = jrapper.measure(
+    jrapper.parse(tokenizer, '後始末するアノニマス')
   )
   console.log(rhymes)
 })

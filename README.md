@@ -1,6 +1,6 @@
-# rapper
+# jrapper
 
-`rapper` can detect `Japanese rhyme` in text. `rapper` analyzes morphemes then detect phrases and detect rhyming words.
+`jrapper` can detect `Japanese rhyme` in text. `jrapper` analyzes morphemes then detect phrases and detect rhyming words.
 
 example:
 
@@ -11,11 +11,11 @@ example:
 ```
 
 ```
-const rapper = require('rapper')
+const jrapper = require('jrapper')
 
-rapper.build().then((tokenizer) => {
-  const rhymes = rapper.measure(
-    rapper.parse(tokenizer, '後始末するアノニマス')
+jrapper.build().then((tokenizer) => {
+  const rhymes = jrapper.measure(
+    jrapper.parse(tokenizer, '後始末するアノニマス')
   );
   console.log(rhymes)
   // [ { w1:
@@ -41,5 +41,5 @@ rapper.build().then((tokenizer) => {
 # install
 
 ```
-npm install rapper
+npm install jrapper
 ```
