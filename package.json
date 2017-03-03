@@ -1,0 +1,25 @@
+{
+  "name": "rapper",
+  "version": "0.0.1",
+  "description": "`rapper` can detect `Japanese rhyme` in text. `rapper` analyzes morphemes then detect phrases and detect rhyming words.",
+  "main": "index.js",
+  "bin": "./bin/rapper.js",
+  "scripts": {
+    "test": "eater --require .powerassert",
+    "lint": "standard"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "japanese": "^1.2.0",
+    "kuromoji": "^0.1.1",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "eater": "^3.2.0",
+    "espower-loader": "^1.2.0",
+    "power-assert": "^1.4.2",
+    "standard": "^8.6.0"
+  }
+}
