@@ -26,7 +26,7 @@ build().then(tokenizer => {
 
   test(tokenizer, '謹賀新年 みんな人間', '謹賀新年', 'みんな人間')
 
-  test(tokenizer, 'ハナミズキに返り討ち', 'ハナミズキ', '返り討ち')
+  test(tokenizer, 'ハナミズキに返り討ち', 'ハナミズキ', '返り討ち', {vibes: 7})
 
   test(tokenizer, '水墨画を食べるぐりとぐら', '水墨画', 'ぐりとぐら', { vibes: 10 })
 

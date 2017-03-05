@@ -5,8 +5,8 @@ const kuromoji = require('kuromoji')
 const japanese = require('japanese')
 const collator = new Intl.Collator('en', { sensitivity: 'base' })
 
-const expectPos = ['名詞']
-const connectLongPos = ['名詞', '接頭詞', '形容詞', '形容動詞', '動詞', '接続詞', '連体詞', '助詞', '副詞']
+const expectPos = ['名詞', '動詞', '助詞', '助動詞']
+const connectLongPos = ['名詞', '接頭詞', '形容詞', '形容動詞', '動詞', '接続詞', '連体詞', '助詞', '副詞', '助動詞']
 const connectShortPos = ['名詞', '接頭詞', '形容詞', '形容動詞', '接続詞', '連体詞', '副詞']
 const unexpectPronunciation = ['、', '。']
 const defaultVibes = 8
@@ -28,21 +28,41 @@ module.exports.build = (opts = {
 })
 
 const reverse = (s) => s.split('').reverse().join('')
+const bonusLength = 10
 const calcVibes = (w1, w2, weight = 1) => {
   let vibes = 0
-  for (let i = 0; i < w1.length; i++) {
+  // shorter length
+  const length = w1.length < w2.length ? w1.length : w2.length;
+  for (let i = 0; i < length; i++) {
     let c1 = w1.charAt(i)
     let c2 = w2.charAt(i)
+    
+    if (i === 0 && c1 !== c2 && collator.compare(c1, c2) !== 0) {
+      return vibes
+    }
+    if (i === 1 && c1 !== c2 && collator.compare(c1, c2) !== 0) {
+      return vibes
+    }
+    if (i === 2 && c1 !== c2 && collator.compare(c1, c2) !== 0) {
+      return vibes
+    }
 
     if (c1 === c2) {
       if (c1 === '*') {
         vibes += 0.01
       } else {
-        vibes += 1
+        if (i < bonusLength) {
+          vibes += (1 + ((bonusLength - i) / 10))/2
+        } else {
+          vibes += 0.01
+        }
       }
     } else {
       if (collator.compare(c1, c2) === 0) {
-        vibes += 0.5
+        if (i < bonusLength) {
+          vibes += (0.5 + ((bonusLength - i) / 10))/2
+        } else {
+        }
       }
     }
   }
@@ -128,6 +148,7 @@ module.exports.measure = (words, options = { vibes: defaultVibes }) => {
       const w1 = words[i]
       const w2 = words[j]
 
+      
       if (w1.surface_form === w2.surface_form) {
         continue
       }
@@ -137,8 +158,9 @@ module.exports.measure = (words, options = { vibes: defaultVibes }) => {
       }
 
       let vibes = 0
-      vibes += calcVibes(w1.vowel, w2.vowel)
-      vibes += calcVibes(reverse(w1.vowel), reverse(w2.vowel), 1.2)
+      vibes += calcVibes(w1.vowel, w2.vowel, 0.75)
+      vibes += calcVibes(reverse(w1.vowel), reverse(w2.vowel), 2)
+      if (w1.surface_form === '今日という日を寝ずに待ってた' && w2.surface_form === 'ラッキーアニマルはねずみだってさ') console.log(vibes);
 
       if (vibes > options.vibes) {
         rhymes.push({
