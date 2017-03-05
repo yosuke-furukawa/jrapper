@@ -1,6 +1,6 @@
 {
   "name": "jrapper",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "`jrapper` can detect `Japanese rhyme` in text. `jrapper` analyzes morphemes then detect phrases and detect rhyming words.",
   "main": "index.js",
   "bin": "./bin/jrapper.js",
@@ -8,7 +8,11 @@
     "test": "eater --require .powerassert",
     "lint": "standard"
   },
-  "keywords": ["rapper", "rhyme", "morphemes analysis"],
+  "keywords": [
+    "rapper",
+    "rhyme",
+    "morphemes analysis"
+  ],
   "author": "yosuke-furukawa",
   "license": "MIT",
   "dependencies": {
