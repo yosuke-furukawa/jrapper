@@ -43,3 +43,7 @@ jrapper.build().then((tokenizer) => {
 ```
 npm install jrapper
 ```
+
+# inspired
+
+- https://github.com/suzuki86/rhymer
